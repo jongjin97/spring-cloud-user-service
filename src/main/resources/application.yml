@@ -1,0 +1,48 @@
+
+server:
+  port: 0
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+greeting:
+  message: Welcom to the Simple E-commerce.
+
+spring:
+  zipkin:
+    base-url: http://localhost:9411
+    enable: true
+  sleuth:
+    sampler:
+      probability: 1.0
+
+  application:
+    name: user-service
+  rabbitmq:
+    host: 119.206.235.108
+    port: 5672
+    username: guest
+    password: guest
+  h2:
+    console:
+      path: /h2-console
+      settings:
+        web-allow-others: true
+      enabled: true
+#  datasource:
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:mem:test
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, busrefresh, refresh, beans, info, metrics, prometheus
+
+logging:
+  level:
+    com.example.userservice.client: DEBUG
